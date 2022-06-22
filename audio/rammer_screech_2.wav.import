@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/rammer_screech_2.wav-bbb5079ee5e8c033dde3e40c9ba30e28.sample"
+
+[deps]
+
+source_file="res://audio/rammer_screech_2.wav"
+dest_files=[ "res://.import/rammer_screech_2.wav-bbb5079ee5e8c033dde3e40c9ba30e28.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

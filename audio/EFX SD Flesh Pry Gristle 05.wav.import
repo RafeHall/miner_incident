@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/EFX SD Flesh Pry Gristle 05.wav-f8bb79e8c4f342433db0696fb3820d94.sample"
+
+[deps]
+
+source_file="res://audio/EFX SD Flesh Pry Gristle 05.wav"
+dest_files=[ "res://.import/EFX SD Flesh Pry Gristle 05.wav-f8bb79e8c4f342433db0696fb3820d94.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=true
+force/max_rate=true
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=1

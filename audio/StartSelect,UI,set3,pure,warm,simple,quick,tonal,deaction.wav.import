@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/StartSelect,UI,set3,pure,warm,simple,quick,tonal,deaction.wav-c7438102c9242265441262d7751d2845.sample"
+
+[deps]
+
+source_file="res://audio/StartSelect,UI,set3,pure,warm,simple,quick,tonal,deaction.wav"
+dest_files=[ "res://.import/StartSelect,UI,set3,pure,warm,simple,quick,tonal,deaction.wav-c7438102c9242265441262d7751d2845.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=true
+force/max_rate=true
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=1

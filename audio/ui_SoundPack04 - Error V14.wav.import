@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/ui_SoundPack04 - Error V14.wav-dc520a93b54188689da35f8b37f29690.sample"
+
+[deps]
+
+source_file="res://audio/ui_SoundPack04 - Error V14.wav"
+dest_files=[ "res://.import/ui_SoundPack04 - Error V14.wav-dc520a93b54188689da35f8b37f29690.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=true
+force/max_rate=true
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=1

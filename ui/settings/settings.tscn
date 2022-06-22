@@ -1,0 +1,224 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://ui/custom_theme.tres" type="Theme" id=1]
+[ext_resource path="res://ui/huge_font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://ui/settings/settings.gd" type="Script" id=3]
+[ext_resource path="res://ui/large_font.tres" type="DynamicFont" id=4]
+[ext_resource path="res://ui/audio_button.gd" type="Script" id=6]
+[ext_resource path="res://audio/button_click.sample" type="AudioStream" id=7]
+[ext_resource path="res://ui/audio_slider.gd" type="Script" id=8]
+
+[node name="Settings" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 2160.76, -28.7204 )
+theme = ExtResource( 1 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.572549 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+margin_left = 560.0
+margin_top = 240.0
+margin_right = 1360.0
+margin_bottom = 840.0
+rect_min_size = Vector2( 800, 600 )
+custom_constants/separation = 0
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
+margin_right = 800.0
+margin_bottom = 32.0
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Settings"
+align = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer/VBoxContainer"]
+margin_top = 32.0
+margin_right = 800.0
+margin_bottom = 600.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer/PanelContainer"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 796.0
+margin_bottom = 564.0
+custom_constants/separation = 2
+
+[node name="Panel" type="PanelContainer" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+margin_right = 792.0
+margin_bottom = 526.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/Panel"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 788.0
+margin_bottom = 522.0
+custom_constants/separation = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/Panel/VBoxContainer"]
+margin_right = 784.0
+margin_bottom = 16.0
+custom_constants/separation = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/Panel/VBoxContainer/HBoxContainer"]
+margin_right = 391.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Master Volume"
+align = 1
+
+[node name="MasterVolume" type="HSlider" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/Panel/VBoxContainer/HBoxContainer"]
+margin_left = 393.0
+margin_right = 784.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+step = 5.0
+value = 50.0
+rounded = true
+script = ExtResource( 8 )
+audio_effect = ExtResource( 7 )
+start = 0.3
+end = 0.5
+pitch = 4.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/Panel/VBoxContainer"]
+margin_top = 24.0
+margin_right = 784.0
+margin_bottom = 40.0
+custom_constants/separation = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/Panel/VBoxContainer/HBoxContainer2"]
+margin_right = 391.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Ambience Volume"
+align = 1
+
+[node name="MusicVolume" type="HSlider" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/Panel/VBoxContainer/HBoxContainer2"]
+margin_left = 393.0
+margin_right = 784.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+step = 5.0
+value = 50.0
+rounded = true
+script = ExtResource( 8 )
+audio_effect = ExtResource( 7 )
+start = 0.3
+end = 0.5
+pitch = 4.0
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/Panel/VBoxContainer"]
+margin_top = 48.0
+margin_right = 784.0
+margin_bottom = 64.0
+custom_constants/separation = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/Panel/VBoxContainer/HBoxContainer3"]
+margin_right = 391.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Effects Volume"
+align = 1
+
+[node name="EffectsVolume" type="HSlider" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/Panel/VBoxContainer/HBoxContainer3"]
+margin_left = 393.0
+margin_right = 784.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+step = 5.0
+value = 50.0
+rounded = true
+script = ExtResource( 8 )
+audio_effect = ExtResource( 7 )
+start = 0.3
+end = 0.5
+pitch = 4.0
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/Panel/VBoxContainer"]
+margin_top = 72.0
+margin_right = 784.0
+margin_bottom = 88.0
+custom_constants/separation = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/Panel/VBoxContainer/HBoxContainer4"]
+margin_right = 391.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Fullscreen"
+align = 1
+
+[node name="FullscreenToggle" type="Button" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/Panel/VBoxContainer/HBoxContainer4"]
+margin_left = 564.0
+margin_right = 612.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 16, 16 )
+size_flags_horizontal = 6
+size_flags_vertical = 6
+toggle_mode = true
+text = "[X]"
+script = ExtResource( 6 )
+audio_effect = ExtResource( 7 )
+start = 0.3
+end = 0.45
+hover_pitch = 100000.0
+unhover_pitch = 100000.0
+
+[node name="Button" type="PanelContainer" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+margin_top = 528.0
+margin_right = 792.0
+margin_bottom = 560.0
+rect_min_size = Vector2( 0, 32 )
+
+[node name="Back" type="Button" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/Button"]
+margin_left = 348.0
+margin_top = 8.0
+margin_right = 444.0
+margin_bottom = 24.0
+size_flags_horizontal = 6
+size_flags_vertical = 6
+text = "[Back]"
+script = ExtResource( 6 )
+audio_effect = ExtResource( 7 )
+start = 0.3
+end = 0.45
+hover_pitch = 2.0
+unhover_pitch = 1.75
+
+[connection signal="value_changed" from="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/Panel/VBoxContainer/HBoxContainer/MasterVolume" to="." method="_master_volume_changed"]
+[connection signal="value_changed" from="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/Panel/VBoxContainer/HBoxContainer2/MusicVolume" to="." method="_music_volume_changed"]
+[connection signal="value_changed" from="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/Panel/VBoxContainer/HBoxContainer3/EffectsVolume" to="." method="_effects_volume_changed"]
+[connection signal="toggled" from="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/Panel/VBoxContainer/HBoxContainer4/FullscreenToggle" to="." method="_fullscreen_toggled"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/Button/Back" to="." method="_back_pressed"]

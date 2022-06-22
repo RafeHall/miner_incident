@@ -1,0 +1,286 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://ui/custom_theme.tres" type="Theme" id=1]
+[ext_resource path="res://textures/laser.png" type="Texture" id=2]
+[ext_resource path="res://textures/rocket.png" type="Texture" id=3]
+[ext_resource path="res://ui/large_font.tres" type="DynamicFont" id=4]
+[ext_resource path="res://textures/laser_below.png" type="Texture" id=5]
+[ext_resource path="res://ui/hud/hud.gd" type="Script" id=6]
+[ext_resource path="res://textures/ship_health.png" type="Texture" id=7]
+[ext_resource path="res://textures/ship_health_empty.png" type="Texture" id=8]
+[ext_resource path="res://ui/hud/minimap.gd" type="Script" id=9]
+
+[sub_resource type="VisualShaderNodeColorConstant" id=1]
+constant = Color( 0.341176, 0.792157, 1, 1 )
+
+[sub_resource type="VisualShaderNodeScalarUniform" id=2]
+uniform_name = "Intensity"
+
+[sub_resource type="VisualShaderNodeVectorOp" id=3]
+operator = 2
+
+[sub_resource type="VisualShaderNodeInput" id=4]
+input_name = "texture"
+
+[sub_resource type="VisualShaderNodeInput" id=5]
+input_name = "uv"
+
+[sub_resource type="VisualShaderNodeTexture" id=6]
+source = 5
+
+[sub_resource type="VisualShaderNodeVectorOp" id=7]
+operator = 2
+
+[sub_resource type="VisualShader" id=8]
+code = "shader_type canvas_item;
+uniform float Intensity;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Color:2
+	vec3 n_out2p0 = vec3(0.341176, 0.792157, 1.000000);
+	float n_out2p1 = 1.000000;
+
+// ScalarUniform:3
+	float n_out3p0 = Intensity;
+
+// VectorOp:4
+	vec3 n_out4p0 = n_out2p0 * vec3(n_out3p0);
+
+// Input:7
+	vec3 n_out7p0 = vec3(UV, 0.0);
+
+// Input:5
+
+// Texture:8
+	vec3 n_out8p0;
+	float n_out8p1;
+	{
+		vec4 TEXTURE_tex_read = texture(TEXTURE, n_out7p0.xy);
+		n_out8p0 = TEXTURE_tex_read.rgb;
+		n_out8p1 = TEXTURE_tex_read.a;
+	}
+
+// VectorOp:9
+	vec3 n_out9p0 = n_out4p0 * n_out8p0;
+
+// Output:0
+	COLOR.rgb = n_out9p0;
+	COLOR.a = n_out8p1;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+graph_offset = Vector2( -582, 143 )
+mode = 1
+flags/light_only = false
+nodes/fragment/2/node = SubResource( 1 )
+nodes/fragment/2/position = Vector2( -260, 120 )
+nodes/fragment/3/node = SubResource( 2 )
+nodes/fragment/3/position = Vector2( -300, 220 )
+nodes/fragment/4/node = SubResource( 3 )
+nodes/fragment/4/position = Vector2( -60, 120 )
+nodes/fragment/5/node = SubResource( 4 )
+nodes/fragment/5/position = Vector2( -320, 400 )
+nodes/fragment/7/node = SubResource( 5 )
+nodes/fragment/7/position = Vector2( -320, 320 )
+nodes/fragment/8/node = SubResource( 6 )
+nodes/fragment/8/position = Vector2( -100, 320 )
+nodes/fragment/9/node = SubResource( 7 )
+nodes/fragment/9/position = Vector2( 160, 140 )
+nodes/fragment/connections = PoolIntArray( 3, 0, 4, 1, 2, 0, 4, 0, 7, 0, 8, 0, 5, 0, 8, 2, 4, 0, 9, 0, 8, 0, 9, 1, 9, 0, 0, 0, 8, 1, 0, 1 )
+
+[sub_resource type="ShaderMaterial" id=9]
+shader = SubResource( 8 )
+shader_param/Intensity = 1.5
+
+[sub_resource type="StyleBoxFlat" id=10]
+content_margin_left = 0.0
+content_margin_right = 0.0
+content_margin_top = 0.0
+content_margin_bottom = 0.0
+bg_color = Color( 0, 0, 0, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 1, 1, 1, 1 )
+
+[node name="MarginContainer" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 16
+custom_constants/margin_top = 16
+custom_constants/margin_left = 16
+custom_constants/margin_bottom = 16
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Hud" type="Control" parent="."]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 1904.0
+margin_bottom = 1064.0
+theme = ExtResource( 1 )
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Hud"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -276.0
+margin_right = 425.0
+custom_constants/separation = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Hud/VBoxContainer"]
+margin_right = 425.0
+margin_bottom = 8.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0 )
+text = "SYSTEM STATUS"
+align = 1
+valign = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="Hud/VBoxContainer"]
+margin_top = 10.0
+margin_right = 425.0
+margin_bottom = 276.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Hud/VBoxContainer/PanelContainer"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 421.0
+margin_bottom = 262.0
+custom_constants/separation = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Hud/VBoxContainer/PanelContainer/HBoxContainer"]
+margin_right = 287.0
+margin_bottom = 258.0
+size_flags_horizontal = 3
+
+[node name="Health" type="TextureProgress" parent="Hud/VBoxContainer/PanelContainer/HBoxContainer/PanelContainer"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 283.0
+margin_bottom = 254.0
+value = 75.0
+texture_under = ExtResource( 8 )
+texture_progress = ExtResource( 7 )
+nine_patch_stretch = true
+
+[node name="Shield" type="TextureProgress" parent="Hud/VBoxContainer/PanelContainer/HBoxContainer/PanelContainer"]
+material = SubResource( 9 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 283.0
+margin_bottom = 254.0
+value = 24.0
+texture_progress = ExtResource( 7 )
+nine_patch_stretch = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Hud/VBoxContainer/PanelContainer/HBoxContainer"]
+margin_left = 289.0
+margin_right = 417.0
+margin_bottom = 258.0
+custom_constants/separation = 2
+
+[node name="Laser" type="PanelContainer" parent="Hud/VBoxContainer/PanelContainer/HBoxContainer/VBoxContainer"]
+margin_right = 128.0
+margin_bottom = 128.0
+rect_min_size = Vector2( 128, 128 )
+custom_styles/panel = SubResource( 10 )
+
+[node name="TextureProgress" type="TextureProgress" parent="Hud/VBoxContainer/PanelContainer/HBoxContainer/VBoxContainer/Laser"]
+margin_right = 128.0
+margin_bottom = 128.0
+max_value = 1.0
+value = 1.0
+texture_under = ExtResource( 5 )
+texture_progress = ExtResource( 2 )
+fill_mode = 3
+nine_patch_stretch = true
+
+[node name="Rockets" type="PanelContainer" parent="Hud/VBoxContainer/PanelContainer/HBoxContainer/VBoxContainer"]
+margin_top = 130.0
+margin_right = 128.0
+margin_bottom = 258.0
+rect_min_size = Vector2( 128, 128 )
+custom_styles/panel = SubResource( 10 )
+
+[node name="TextureRect" type="TextureRect" parent="Hud/VBoxContainer/PanelContainer/HBoxContainer/VBoxContainer/Rockets"]
+margin_right = 128.0
+margin_bottom = 128.0
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Hud/VBoxContainer/PanelContainer/HBoxContainer/VBoxContainer/Rockets"]
+margin_right = 128.0
+margin_bottom = 128.0
+custom_constants/margin_right = 4
+custom_constants/margin_top = 4
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 4
+
+[node name="Label" type="Label" parent="Hud/VBoxContainer/PanelContainer/HBoxContainer/VBoxContainer/Rockets/MarginContainer"]
+margin_left = 4.0
+margin_top = 108.0
+margin_right = 124.0
+margin_bottom = 124.0
+size_flags_horizontal = 3
+size_flags_vertical = 8
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0 )
+text = "0"
+align = 1
+
+[node name="Label" type="Label" parent="Hud"]
+margin_right = 384.0
+margin_bottom = 16.0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Current Directive: Scout"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="Hud"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -264.0
+margin_top = -264.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Minimap" type="PanelContainer" parent="Hud/PanelContainer"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 260.0
+margin_bottom = 260.0
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

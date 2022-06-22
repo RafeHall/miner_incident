@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Crepitus,knuckles,hand,multiple,dense,deep.M.wav-17ebb39975401d47eb588bb7ef073404.sample"
+
+[deps]
+
+source_file="res://audio/Crepitus,knuckles,hand,multiple,dense,deep.M.wav"
+dest_files=[ "res://.import/Crepitus,knuckles,hand,multiple,dense,deep.M.wav-17ebb39975401d47eb588bb7ef073404.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=true
+force/max_rate=true
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=1

@@ -1,0 +1,415 @@
+[gd_scene load_steps=33 format=2]
+
+[ext_resource path="res://ui/custom_theme.tres" type="Theme" id=1]
+[ext_resource path="res://ui/huge_font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://ui/large_font.tres" type="DynamicFont" id=3]
+[ext_resource path="res://ui/main_menu/main_menu.gd" type="Script" id=4]
+[ext_resource path="res://ui/audio_button.gd" type="Script" id=5]
+[ext_resource path="res://audio/button_click.sample" type="AudioStream" id=6]
+[ext_resource path="res://ui/main_menu/rich_text_ghost.gd" type="Script" id=7]
+[ext_resource path="res://audio/main_menu_buzzing.sample" type="AudioStream" id=8]
+[ext_resource path="res://audio/shop_ambient.ogg" type="AudioStream" id=9]
+[ext_resource path="res://ui/loading/loading.scn" type="PackedScene" id=10]
+
+[sub_resource type="RichTextEffect" id=1]
+script = ExtResource( 7 )
+
+[sub_resource type="VisualShaderNodeVectorOp" id=2]
+default_input_values = [ 0, Vector3( 0, 0, 0 ), 1, Vector3( 0.5, 0, 0 ) ]
+operator = 2
+
+[sub_resource type="VisualShaderNodeVectorOp" id=3]
+
+[sub_resource type="VisualShaderNodeTexture" id=4]
+source = 5
+texture_type = 1
+
+[sub_resource type="VisualShaderNodeVectorOp" id=5]
+default_input_values = [ 0, Vector3( 0, 0, 0 ), 1, Vector3( -0.0015, 0.0025, 0 ) ]
+
+[sub_resource type="VisualShaderNodeVectorOp" id=6]
+default_input_values = [ 0, Vector3( 0, 0, 0 ), 1, Vector3( 0, 0, 0.5 ) ]
+operator = 2
+
+[sub_resource type="VisualShaderNodeTexture" id=7]
+source = 5
+texture_type = 1
+
+[sub_resource type="VisualShaderNodeScalarUniform" id=8]
+uniform_name = "Glow"
+
+[sub_resource type="VisualShaderNodeVectorOp" id=9]
+
+[sub_resource type="VisualShaderNodeVectorScalarMix" id=10]
+default_input_values = [ 0, Vector3( 0, 0, 0 ), 1, Vector3( 1, 1, 1 ), 2, 1.0 ]
+
+[sub_resource type="VisualShaderNodeScalarOp" id=18]
+default_input_values = [ 0, 0.0, 1, 32.0 ]
+operator = 2
+
+[sub_resource type="VisualShaderNodeInput" id=11]
+input_name = "screen_texture"
+
+[sub_resource type="VisualShaderNodeVectorDecompose" id=19]
+
+[sub_resource type="VisualShaderNodeScalarFunc" id=21]
+function = 17
+
+[sub_resource type="VisualShaderNodeVectorDistance" id=22]
+default_input_values = [ 0, Vector3( 0, 0, 0 ), 1, Vector3( 0.5, 0.5, 0.5 ) ]
+
+[sub_resource type="VisualShaderNodeScalarOp" id=24]
+default_input_values = [ 0, 0.0, 1, 2.0 ]
+operator = 2
+
+[sub_resource type="VisualShaderNodeInput" id=12]
+input_name = "screen_uv"
+
+[sub_resource type="VisualShaderNodeTexture" id=13]
+source = 5
+texture_type = 1
+
+[sub_resource type="VisualShaderNodeTexture" id=14]
+source = 5
+texture_type = 1
+
+[sub_resource type="VisualShaderNodeVectorOp" id=15]
+default_input_values = [ 0, Vector3( 0, 0, 0 ), 1, Vector3( 0.0015, -0.0025, 0 ) ]
+
+[sub_resource type="VisualShader" id=16]
+code = "shader_type canvas_item;
+uniform float Glow;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Input:3
+	vec3 n_out3p0 = vec3(SCREEN_UV, 0.0);
+
+// VectorOp:8
+	vec3 n_in8p1 = vec3(0.00150, -0.00250, 0.00000);
+	vec3 n_out8p0 = n_out3p0 + n_in8p1;
+
+// Input:2
+
+// Texture:4
+	vec3 n_out4p0;
+	float n_out4p1;
+	{
+		vec4 SCREEN_TEXTURE_tex_read = texture(SCREEN_TEXTURE, n_out8p0.xy);
+		n_out4p0 = SCREEN_TEXTURE_tex_read.rgb;
+		n_out4p1 = SCREEN_TEXTURE_tex_read.a;
+	}
+
+// VectorOp:10
+	vec3 n_in10p1 = vec3(0.50000, 0.00000, 0.00000);
+	vec3 n_out10p0 = n_out4p0 * n_in10p1;
+
+// VectorOp:13
+	vec3 n_in13p1 = vec3(-0.00150, 0.00250, 0.00000);
+	vec3 n_out13p0 = n_out3p0 + n_in13p1;
+
+// Texture:12
+	vec3 n_out12p0;
+	float n_out12p1;
+	{
+		vec4 SCREEN_TEXTURE_tex_read = texture(SCREEN_TEXTURE, n_out13p0.xy);
+		n_out12p0 = SCREEN_TEXTURE_tex_read.rgb;
+		n_out12p1 = SCREEN_TEXTURE_tex_read.a;
+	}
+
+// VectorOp:14
+	vec3 n_in14p1 = vec3(0.00000, 0.00000, 0.50000);
+	vec3 n_out14p0 = n_out12p0 * n_in14p1;
+
+// VectorOp:11
+	vec3 n_out11p0 = n_out10p0 + n_out14p0;
+
+// Texture:6
+	vec3 n_out6p0;
+	float n_out6p1;
+	{
+		vec4 SCREEN_TEXTURE_tex_read = texture(SCREEN_TEXTURE, n_out3p0.xy);
+		n_out6p0 = SCREEN_TEXTURE_tex_read.rgb;
+		n_out6p1 = SCREEN_TEXTURE_tex_read.a;
+	}
+
+// VectorScalarMix:18
+	vec3 n_out18p0 = mix(n_out11p0, n_out6p0, dot(n_out6p0, vec3(0.333333, 0.333333, 0.333333)));
+
+// ScalarUniform:16
+	float n_out16p0 = Glow;
+
+// Texture:15
+	vec3 n_out15p0;
+	float n_out15p1;
+	{
+		vec4 SCREEN_TEXTURE_tex_read = textureLod(SCREEN_TEXTURE, n_out3p0.xy, n_out16p0);
+		n_out15p0 = SCREEN_TEXTURE_tex_read.rgb;
+		n_out15p1 = SCREEN_TEXTURE_tex_read.a;
+	}
+
+// VectorOp:17
+	vec3 n_out17p0 = n_out18p0 + n_out15p0;
+
+// Output:0
+	COLOR.rgb = n_out17p0;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+graph_offset = Vector2( -80.1281, -27.7962 )
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2( 1280, -20 )
+nodes/fragment/2/node = SubResource( 11 )
+nodes/fragment/2/position = Vector2( -500, 400 )
+nodes/fragment/3/node = SubResource( 12 )
+nodes/fragment/3/position = Vector2( -920, 0 )
+nodes/fragment/4/node = SubResource( 13 )
+nodes/fragment/4/position = Vector2( -160, -40 )
+nodes/fragment/6/node = SubResource( 14 )
+nodes/fragment/6/position = Vector2( -160, 380 )
+nodes/fragment/8/node = SubResource( 15 )
+nodes/fragment/8/position = Vector2( -420, -40 )
+nodes/fragment/10/node = SubResource( 2 )
+nodes/fragment/10/position = Vector2( 80, -40 )
+nodes/fragment/11/node = SubResource( 3 )
+nodes/fragment/11/position = Vector2( 320, -40 )
+nodes/fragment/12/node = SubResource( 4 )
+nodes/fragment/12/position = Vector2( -160, 80 )
+nodes/fragment/13/node = SubResource( 5 )
+nodes/fragment/13/position = Vector2( -420, 80 )
+nodes/fragment/14/node = SubResource( 6 )
+nodes/fragment/14/position = Vector2( 80, 80 )
+nodes/fragment/15/node = SubResource( 7 )
+nodes/fragment/15/position = Vector2( -160, 240 )
+nodes/fragment/16/node = SubResource( 8 )
+nodes/fragment/16/position = Vector2( -505.62, 280.72 )
+nodes/fragment/17/node = SubResource( 9 )
+nodes/fragment/17/position = Vector2( 1000, -40 )
+nodes/fragment/18/node = SubResource( 10 )
+nodes/fragment/18/position = Vector2( 660, -40 )
+nodes/fragment/19/node = SubResource( 18 )
+nodes/fragment/19/position = Vector2( -480, -240 )
+nodes/fragment/20/node = SubResource( 19 )
+nodes/fragment/20/position = Vector2( -640, -160 )
+nodes/fragment/22/node = SubResource( 21 )
+nodes/fragment/22/position = Vector2( -280, -220 )
+nodes/fragment/23/node = SubResource( 22 )
+nodes/fragment/23/position = Vector2( -20, -220 )
+nodes/fragment/25/node = SubResource( 24 )
+nodes/fragment/25/position = Vector2( 200, -320 )
+nodes/fragment/connections = PoolIntArray( 2, 0, 4, 2, 3, 0, 6, 0, 2, 0, 6, 2, 3, 0, 8, 0, 8, 0, 4, 0, 4, 0, 10, 0, 10, 0, 11, 0, 3, 0, 13, 0, 13, 0, 12, 0, 2, 0, 12, 2, 12, 0, 14, 0, 14, 0, 11, 1, 2, 0, 15, 2, 3, 0, 15, 0, 16, 0, 15, 1, 15, 0, 17, 1, 18, 0, 17, 0, 3, 0, 20, 0, 20, 1, 19, 0, 19, 0, 22, 0, 17, 0, 0, 0, 22, 0, 23, 0, 6, 0, 18, 1, 23, 0, 25, 0, 11, 0, 18, 0, 6, 0, 18, 2 )
+
+[sub_resource type="ShaderMaterial" id=17]
+shader = SubResource( 16 )
+shader_param/Glow = 1.0
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="LoadingScreen" parent="." instance=ExtResource( 10 )]
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+margin_left = 560.0
+margin_top = 240.0
+margin_right = 1360.0
+margin_bottom = 840.0
+rect_min_size = Vector2( 800, 600 )
+custom_constants/separation = 0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
+margin_right = 800.0
+margin_bottom = 32.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 2 )
+text = "Miner Incident"
+align = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer/VBoxContainer"]
+margin_top = 32.0
+margin_right = 800.0
+margin_bottom = 600.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer/PanelContainer"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 796.0
+margin_bottom = 564.0
+custom_constants/separation = 2
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Text" type="PanelContainer" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+margin_right = 792.0
+margin_bottom = 526.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/Text"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 788.0
+margin_bottom = 522.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/normal_font = ExtResource( 3 )
+bbcode_enabled = true
+bbcode_text = "[ghost speed=25]System Starting..................
+Self Diagnostics............
+
+System Status: No Faults
+Blast Shield 47% Active - Seek Recharge Station
+Additional Explosives Armed
+
+
+[Emergency Operation Instructions]
+W To Move Forward
+A To Turn Left
+D To Turn Right
+Space To Fire Plasma Bore
+L-Shift To Fire Explosive Projectile[/ghost]
+"
+text = "System Starting..................
+Self Diagnostics............
+
+System Status: No Faults
+Blast Shield 47% Active - Seek Recharge Station
+Additional Explosives Armed
+
+
+[Emergency Operation Instructions]
+W To Move Forward
+A To Turn Left
+D To Turn Right
+Space To Fire Plasma Bore
+L-Shift To Fire Explosive Projectile
+"
+scroll_active = false
+custom_effects = [ SubResource( 1 ) ]
+
+[node name="Buttons" type="PanelContainer" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+margin_top = 528.0
+margin_right = 792.0
+margin_bottom = 560.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/Buttons"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 788.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 0, 24 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Start" type="Button" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/Buttons/HBoxContainer"]
+margin_left = 73.0
+margin_top = 4.0
+margin_right = 185.0
+margin_bottom = 20.0
+size_flags_horizontal = 6
+size_flags_vertical = 6
+custom_fonts/font = ExtResource( 3 )
+text = "[Start]"
+align = 0
+script = ExtResource( 5 )
+audio_effect = ExtResource( 6 )
+start = 0.3
+end = 0.45
+hover_pitch = 2.0
+unhover_pitch = 1.75
+
+[node name="Settings" type="Button" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/Buttons/HBoxContainer"]
+margin_left = 311.0
+margin_top = 4.0
+margin_right = 471.0
+margin_bottom = 20.0
+size_flags_horizontal = 6
+size_flags_vertical = 6
+custom_fonts/font = ExtResource( 3 )
+text = "[Settings]"
+align = 0
+script = ExtResource( 5 )
+audio_effect = ExtResource( 6 )
+start = 0.3
+end = 0.45
+hover_pitch = 2.0
+unhover_pitch = 1.75
+
+[node name="Exit" type="Button" parent="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/Buttons/HBoxContainer"]
+margin_left = 606.0
+margin_top = 4.0
+margin_right = 702.0
+margin_bottom = 20.0
+size_flags_horizontal = 6
+size_flags_vertical = 6
+custom_fonts/font = ExtResource( 3 )
+text = "[Exit]"
+align = 0
+script = ExtResource( 5 )
+audio_effect = ExtResource( 6 )
+start = 0.3
+end = 0.45
+hover_pitch = 2.0
+unhover_pitch = 1.75
+
+[node name="Effects" type="ColorRect" parent="."]
+material = SubResource( 17 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Buzzing" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+volume_db = -20.0
+autoplay = true
+bus = "Music"
+
+[node name="Fan" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+volume_db = -7.0
+autoplay = true
+bus = "Music"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/Buttons/HBoxContainer/Start" to="." method="_start_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/Buttons/HBoxContainer/Settings" to="." method="_settings_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/PanelContainer/VBoxContainer/Buttons/HBoxContainer/Exit" to="." method="_exit_pressed"]

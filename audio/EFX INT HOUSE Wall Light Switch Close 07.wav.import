@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/EFX INT HOUSE Wall Light Switch Close 07.wav-cd4bd2b7a3641a1db0b90a828163f0b2.sample"
+
+[deps]
+
+source_file="res://audio/EFX INT HOUSE Wall Light Switch Close 07.wav"
+dest_files=[ "res://.import/EFX INT HOUSE Wall Light Switch Close 07.wav-cd4bd2b7a3641a1db0b90a828163f0b2.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=true
+force/max_rate=true
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=1

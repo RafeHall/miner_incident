@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/ANIMAL FARM Pig, Baby, Scream, Shrill, City Street 01.wav-7a8de397a0747b74b0a2d2ea3839799a.sample"
+
+[deps]
+
+source_file="res://audio/ANIMAL FARM Pig, Baby, Scream, Shrill, City Street 01.wav"
+dest_files=[ "res://.import/ANIMAL FARM Pig, Baby, Scream, Shrill, City Street 01.wav-7a8de397a0747b74b0a2d2ea3839799a.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

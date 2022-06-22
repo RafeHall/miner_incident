@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/UI_SoundPack8_Scroll_v2.wav-31dc594b5afdf88feef914ece7737194.sample"
+
+[deps]
+
+source_file="res://audio/UI_SoundPack8_Scroll_v2.wav"
+dest_files=[ "res://.import/UI_SoundPack8_Scroll_v2.wav-31dc594b5afdf88feef914ece7737194.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=true
+force/max_rate=true
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=1
